@@ -47,8 +47,9 @@ action 012 cli command "interface f0/0"
 action 013 cli command "no shut"
 action 014 cli command "interface tunnel0"
 action 015 cli command "no shut"
-action 016 syslog msg "TUNNEL HAS BEEN REINITIALIZED"
-action 017 end
+action 016 cli command "end"
+action 017 syslog msg "TUNNEL HAS BEEN REINITIALIZED"
+action 018 end
 ```
 
 ## Explanation
@@ -89,12 +90,12 @@ action 017 end
   - If statement checking the previous regex result
 - `action 005 syslog msg "Echo Reply timed out; Tunnel is down"`
   - Sends the above message to the syslog, or to the screen if you are consoled in
-- `action 006-0015`
+- `action 006-0016`
   - CLI commands to reset / bump your tunnel connection, replace with whatever actions you would otherwise have to do manually
-- `action 016 syslog msg "TUNNEL HAS BEEN REINITIALIZED"`
+- `action 017 syslog msg "TUNNEL HAS BEEN REINITIALIZED"`
   - Sends the above message to the syslog, or to the screen if you are consoled in
-- `action 017 end`
-  - Closes the if statement started in action 004, actions 005 through 016 will only be run if 004 is true
+- `action 018 end`
+  - Closes the if statement started in action 004, actions 005 through 017 will only be run if 004 is true
 
 ---
 

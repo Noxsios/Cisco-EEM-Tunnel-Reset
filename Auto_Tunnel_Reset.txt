@@ -28,5 +28,6 @@ action 012 cli command "interface f0/0"
 action 013 cli command "no shut"
 action 014 cli command "interface tunnel0"
 action 015 cli command "no shut"
-action 016 syslog msg "TUNNEL HAS BEEN REINITIALIZED"
-action 017 end
+action 016 cli command "end"
+action 017 syslog msg "TUNNEL HAS BEEN REINITIALIZED"
+action 018 end
