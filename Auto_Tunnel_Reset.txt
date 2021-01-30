@@ -1,0 +1,32 @@
+! Tunnel Reset Script (Example) for Cisco IOS Routers
+! See README.md for how to use and modify
+
+ip sla 10
+icmp-echo 8.8.8.8 !REPLACE ME
+frequency 30
+exit
+ip sla schedule 10 life forever start-time now
+!
+track 1 ip sla 10 reachability
+delay down 90 up 90
+exit
+!
+event manager applet Tunnel-Down
+event timer watchdog time 30 ratelimit 45
+action 001 cli command "enable"
+action 002 cli command "sh track 1 | i Reachability"
+action 003 regexp "Reachability is Up" "$_cli_result"
+action 004 if "$_regexp_result" eq "0"
+action 005 syslog msg "Echo Reply timed out; Tunnel is down"
+action 006 cli command "conf t"
+action 007 cli command "interface f0/0"
+action 008 cli command "shut"
+action 009 cli command "interface tunnel0"
+action 010 cli command "shut"
+action 011 cli command "do clear crypto sess"
+action 012 cli command "interface f0/0"
+action 013 cli command "no shut"
+action 014 cli command "interface tunnel0"
+action 015 cli command "no shut"
+action 016 syslog msg "TUNNEL HAS BEEN REINITIALIZED"
+action 017 end
