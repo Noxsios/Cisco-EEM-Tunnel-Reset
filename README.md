@@ -90,7 +90,7 @@ action 018 end
   - If statement checking the previous regex result
 - `action 005 syslog msg "Echo Reply timed out; Tunnel is down"`
   - Sends the above message to the syslog, or to the screen if you are consoled in
-- `action 006-0016`
+- `action 006-016`
   - CLI commands to reset / bump your tunnel connection, replace with whatever actions you would otherwise have to do manually
 - `action 017 syslog msg "TUNNEL HAS BEEN REINITIALIZED"`
   - Sends the above message to the syslog, or to the screen if you are consoled in
